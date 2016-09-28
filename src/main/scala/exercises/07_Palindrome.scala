@@ -9,6 +9,7 @@ object Palindrome {
    *  http://docs.scala-lang.org/overviews/collections/overview.html 
    */
   def isPalindrome(s: String): Boolean = {
+    // NB: This could also be done using filter(_.isLetter)!
     val cleanedWord = s.replaceAll("[^a-zA-Z]","")
     cleanedWord.equalsIgnoreCase(cleanedWord.reverse) 
   }

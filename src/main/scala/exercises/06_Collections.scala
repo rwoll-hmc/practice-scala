@@ -30,16 +30,12 @@ object Collections {
    * Hint: there is a built-in function for this you can use.
    * 
    */
-  def firstElementInList[T](l: List[T]): T = {
-    l.head
-  }
+  def firstElementInList[T](l: List[T]): T = l.head
 
   /**
    * Get the sum of all the elements in the list, e.g. sumOfList(List(1,2,3)) = 6.
    */
-  def sumOfList(l: List[Int]): Int = {
-    l.fold(0)({(a,b) => a+b })
-  }
+  def sumOfList(l: List[Int]): Int = l.fold(0)({(a,b) => a+b })
 
   /**
    * Get the last element in the list, e.g. lastElementInList(List(1,2,3)) = 3.
@@ -50,9 +46,7 @@ object Collections {
    *  - by using a foldLeft function
    *  - ... etc
    */
-  def lastElementInList[T](l: List[T]): T = {
-    l(l.length-1)
-  }
+  def lastElementInList[T](l: List[T]): T = l(l.length-1)
 
    /**
    * Get the nth element in the list, e.g. nthElementInList(3, List(1,2,3,4)) = 3.
@@ -64,9 +58,7 @@ object Collections {
    *    zipWithIndex function, that is available on a List)
    *  - ... etc
    */
-  def nthElementInList[T](n: Int, l: List[T]): T = {
-    l(n)
-  }
+  def nthElementInList[T](n: Int, l: List[T]): T = l(n)
 
   /**
    * Concatenate two lists into one, e.g. 
@@ -78,9 +70,7 @@ object Collections {
    *  - custom made
    *  - ... etc 
    */
-  def concatLists[T](l1: List[T], l2: List[T]): List[T] = {
-    l1 ++ l2
-  }
+  def concatLists[T](l1: List[T], l2: List[T]): List[T] = l1 ++ l2
 
   /**
    * Sort a list on the natural ordering, so sortList(3,1,2) = List(1,2,3).
@@ -91,9 +81,7 @@ object Collections {
    * - ... whichever way you like 
    * 
    */
-  def sortList[T <% Ordered[T]](list: List[T]): List[T] = {
-    list.sorted
-  }
+  def sortList[T <% Ordered[T]](list: List[T]): List[T] = list.sorted
 
   /**
    * Check whether a given element in a list exists, 
@@ -102,9 +90,7 @@ object Collections {
    * Again, easy to implement using built-in functionality, but also possible 
    * to implement in your own free-style way.
    */
-  def elementExists[T](l: List[T], e: T): Boolean = {
-    l.contains(e)
-  }
+  def elementExists[T](l: List[T], e: T): Boolean = l.contains(e)
 
   /**
    * Get all odd elements in the list, i.e. 
@@ -113,9 +99,7 @@ object Collections {
    * As always, use either build-in functions, or roll your own way via a
    * pattern match or some other method.
    */
-  def oddElements(iList: List[Int]): List[Int] = {
-    iList.foldRight(List(): List[Int])({(l,acc) => if (l % 2 != 0)  l::acc else acc })
-  }
+  def oddElements(iList: List[Int]): List[Int] = iList.foldRight(List(): List[Int])({(l,acc) => if (l % 2 != 0)  l::acc else acc })
 
   /**
    * Returns a list of lists, containing all final segments of the argument 
@@ -141,9 +125,7 @@ object Collections {
    * 
    * As usual, various ways exist: pattern matching, folding, ...
    */
-  def maxElementInList(l: List[Int]): Int = {
-    l.sortWith(_ > _).head
-  }
+  def maxElementInList(l: List[Int]): Int = l.sortWith(_ > _).head
 
   /**
    * Calculate the sum of the equally position elements
@@ -161,9 +143,7 @@ object Collections {
    *  For this exercise preferably make use of the sumOfTwo
    * method above
    */
-  def sumOfMany(l: List[Int]*): List[Int] = {
-    l.fold(List())(sumOfTwo)
-  }
+  def sumOfMany(l: List[Int]*): List[Int] = l.fold(List())(sumOfTwo)
 
   case class Person(age: Int, firstName: String, lastName: String)
 

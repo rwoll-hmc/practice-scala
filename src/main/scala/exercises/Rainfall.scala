@@ -16,6 +16,7 @@ object Rainfall {
    *  http://docs.scala-lang.org/overviews/collections/overview.html 
    */
   def rainfall(data: Seq[Double]): Double = {
+    // NB: It may be more Scala-like to omit some of the `.`; see solution
     val relData = data.takeWhile(_ != -999).filter(_ >= 0)
     relData.foldLeft(0.0)(_ + _) / relData.length
   }

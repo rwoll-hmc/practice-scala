@@ -33,10 +33,8 @@ object PatternMatching {
 
   def describeLanguage(s: String): String = {
     s match {
-      case "Java" => "OOP"
-      case "Smalltalk" => "OOP"
-      case "Clojure" => "Functional"
-      case "Haskell" => "Functional"
+      case "Java" | "Smalltalk"=> "OOP"
+      case "Clojure" | "Haskell" => "Functional"
       case "Scala" => "Hybrid"
       case "C" => "Procedural"
       case _ => "Unknown"
@@ -65,11 +63,12 @@ object PatternMatching {
    */
   def matchOnInputType(in: Any): String = {
     in match {
-      case s: String => "A string with length " + s.length
+      case s: String => s"A string with length ${s.length}"
       case i: Integer if i > 0 => "A positive integer"
-      case p: Person => "A person with name: " + p.name
+      case p: Person => s"A person with name: ${p.name}" 
       case s: Seq[Any] if s.length > 10 => "Seq with more than 10 elements"
-      case s: Seq[Any] if s.length > 3 => "first: " + s.head + ", second: " + s.tail.head + ", rest: " + s.tail.tail
+        // NB: This is not the best way; the solution has a much more elegant way of pattern matching on the structure of the list
+      case s: Seq[Any] if s.length > 3 => s"first: ${s.head}, second: ${s.tail.head}, rest: ${s.tail.tail}"
       case null => "A null value"
       case _ => "Some Scala class"
     }
