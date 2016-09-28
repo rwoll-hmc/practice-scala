@@ -31,14 +31,14 @@ object Collections {
    * 
    */
   def firstElementInList[T](l: List[T]): T = {
-    error("fix me")
+    l.head
   }
 
   /**
    * Get the sum of all the elements in the list, e.g. sumOfList(List(1,2,3)) = 6.
    */
   def sumOfList(l: List[Int]): Int = {
-    error("fix me")
+    l.fold(0)({(a,b) => a+b })
   }
 
   /**
@@ -51,7 +51,7 @@ object Collections {
    *  - ... etc
    */
   def lastElementInList[T](l: List[T]): T = {
-    error("fix me")
+    l(l.length-1)
   }
 
    /**
@@ -65,7 +65,7 @@ object Collections {
    *  - ... etc
    */
   def nthElementInList[T](n: Int, l: List[T]): T = {
-    error("fix me")
+    l(n)
   }
 
   /**
@@ -79,7 +79,7 @@ object Collections {
    *  - ... etc 
    */
   def concatLists[T](l1: List[T], l2: List[T]): List[T] = {
-    error("fix me")
+    l1 ++ l2
   }
 
   /**
@@ -92,7 +92,7 @@ object Collections {
    * 
    */
   def sortList[T <% Ordered[T]](list: List[T]): List[T] = {
-    error("fix me")
+    list.sorted
   }
 
   /**
@@ -103,7 +103,7 @@ object Collections {
    * to implement in your own free-style way.
    */
   def elementExists[T](l: List[T], e: T): Boolean = {
-    error("fix me")
+    l.contains(e)
   }
 
   /**
@@ -114,7 +114,7 @@ object Collections {
    * pattern match or some other method.
    */
   def oddElements(iList: List[Int]): List[Int] = {
-    error("fix me")
+    iList.foldRight(List(): List[Int])({(l,acc) => if (l % 2 != 0)  l::acc else acc })
   }
 
   /**
@@ -130,7 +130,10 @@ object Collections {
    * neat way using recursion. 
    */
   def tails[T](l: List[T]): List[List[T]] = {
-    error("fix me")
+    l match {
+      case List() => List(List())
+      case (x::xs) => (x::xs)::tails(xs)
+    }
   }
   
   /**
@@ -139,7 +142,7 @@ object Collections {
    * As usual, various ways exist: pattern matching, folding, ...
    */
   def maxElementInList(l: List[Int]): Int = {
-    error("fix me")
+    l.sortWith(_ > _).head
   }
 
   /**
@@ -147,7 +150,11 @@ object Collections {
    * of the two list
    */
   def sumOfTwo(l1: List[Int], l2: List[Int]): List[Int] = {
-    error("fix me")
+    (l1, l2) match {
+      case (List(), x) => x
+      case (x, List()) => x
+      case (x::xs, y::ys) => (x+y)::sumOfTwo(xs,ys)
+    }
   }
 
   /**
@@ -155,7 +162,7 @@ object Collections {
    * method above
    */
   def sumOfMany(l: List[Int]*): List[Int] = {
-    error("fix me")
+    l.fold(List())(sumOfTwo)
   }
 
   case class Person(age: Int, firstName: String, lastName: String)
@@ -165,31 +172,9 @@ object Collections {
    * The idea is to rewrite the method into more functional style. 
    */
   def separateTheYoungFromTheOld(persons: List[Person]): List[List[String]] = {
-    var youngins: ListBuffer[Person] = new ListBuffer[Person]()
-    var elders: ListBuffer[Person] = new ListBuffer[Person]()
-    var validYoungNames: ListBuffer[String] = new ListBuffer[String]()
-    var validOldNames: ListBuffer[String] = new ListBuffer[String]()
-
-    for (person <- persons) {
-        if (person.age < 18) {
-          youngins += person
-        } else {
-          elders += person
-        }
-    }
-
-    var sortedYoung = youngins.toList.sortBy(_.age)
-    var sortedOld = elders.toList.sortBy(_.age)
-
-    for (young <- sortedYoung) {
-      validYoungNames += young.firstName
-    }
-    for (old <- sortedOld) {
-      validOldNames += old.firstName
-    }
-    
-    List(validYoungNames.toList, validOldNames.toList)
-  }
+    val split = persons.foldRight(List(List(): List[Person], List(): List[Person])) ({ (p, acc) => if (p.age < 18) List(p::acc(0), acc(1)) else List(acc(0), p::acc(1)) })
+    List(split(0).sortBy(_.age).map(_.firstName), split(1).sortBy(_.age).map(_.firstName))
+  }  
 }
 
 

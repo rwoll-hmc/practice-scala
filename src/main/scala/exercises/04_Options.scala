@@ -38,7 +38,7 @@ object Options {
       case Some(Some("locked")) => "not available"
       case Some(Some(x)) => x
       case Some(None) => "empty"
-      case _ => "empty"
+      case None => "not existing"
     }
   }
 
